@@ -2,7 +2,7 @@
     "name": "MainControlSystem",
     "maps": [
         {
-            "name": "PlayerMovement",
+            "name": "Game",
             "id": "bbb48687-7d38-47b4-9713-8c114b267776",
             "actions": [
                 {
