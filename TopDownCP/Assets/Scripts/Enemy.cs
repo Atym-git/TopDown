@@ -8,21 +8,11 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Transform _target;
 
-    //private Vector2 _movement = Vector2.zero;
-
-    private Rigidbody2D _rb;
-
-    private void Start()
+    private void OnTriggerStay2D(Collider2D player)
     {
-        _rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.GetComponent<PlayerInput>() != null)
+        if (player.GetComponent<PlayerInput>() != null)
         {
-            //_rb.velocity = new Vector2(_target.position.x, _target.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, _target.position, 0.05f);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 0.05f);
         }
     }
 
