@@ -8,14 +8,16 @@ public class ShootingEnemy : MonoBehaviour
 
     private Object _bulletPrefab;
 
-    private Transform _bulletRoot;
+    [SerializeField] private Transform _bulletRoot;
+
+    private float _delayafterSpawn = 2;
     private void Awake()
     {
         LoadResources();
     }
     private void Start()
     {
-        _bulletRoot = GetComponentInChildren<Transform>();
+        _bulletRoot = transform.GetChild(0).transform;
         StartCoroutine(Delay());
     }
 
@@ -28,16 +30,12 @@ public class ShootingEnemy : MonoBehaviour
         }
     }
 
-    private void Shoot()
-    {
-        Instantiate(_bulletPrefab, _bulletRoot);
-        Debug.Log(Instantiate(_bulletPrefab, _bulletRoot));
-    }
+    private void Shoot() => Instantiate(_bulletPrefab, _bulletRoot);
+
+    private void OnDestroy() => StopCoroutine(Delay());
 
     private void LoadResources()
     {
         _bulletPrefab = Resources.Load("Prefabs/Bullet");
-        Debug.Log(_bulletPrefab);
-        //Assets/Resources/Prefabs/Bullet.prefab
     }
 }

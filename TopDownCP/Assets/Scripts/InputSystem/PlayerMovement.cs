@@ -11,30 +11,25 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-    private InputAction _mainInputActions;
+    private InputAction _movement;
 
-    private Vector2 _movement = Vector2.zero;
+    private MainControlSystem _mainInputActions;
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _mainInputActions = new();
+        _mainInputActions = new MainControlSystem();
         Bind();
-        _mainInputActions.Enable();
     }
 
     private void Bind()
     {
-        var movement = _mainInputActions.actionMap.FindAction("Movement");
-        _mainInputActions.performed += OnMovement;
-    }
-
-    public void OnMovement(InputAction.CallbackContext value)
-    {
-        _movement = value.ReadValue<Vector2>().normalized;
+        _movement = _mainInputActions.Game.Movement;
+        _movement.Enable();
     }
 
     private void FixedUpdate()
     {
-        _rb.velocity = new Vector2(_movement.x, _movement.y) * _moveSpeed;
+        Vector2 _movement2d = _movement.ReadValue<Vector2>().normalized;
+        _rb.velocity = new Vector2(_movement2d.x, _movement2d.y) * _moveSpeed;
     }
 }
