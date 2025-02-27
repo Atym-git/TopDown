@@ -5,16 +5,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
-    private float _bulletSpeed = 0.01f;
+    private Vector3 _mousePos;
+    private Camera _mainCam;
+    private Rigidbody2D _rb;
 
-    private float _bulletLifetime = 5;
+    private const float _bulletSpeed = 0.1f;
+    private const float _bulletLifetime = 5;
 
-    private void Start()
+    virtual public void Start()
     {
         Destroy(gameObject, _bulletLifetime);
     }
+
     private void FixedUpdate()
     {
         transform.position += new Vector3(_bulletSpeed, 0, 0);
@@ -22,19 +26,10 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Enemy Bullet
         if (collision.gameObject.GetComponent<PlayerMovement>())
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        //Player Bullet
-        else if (collision.gameObject.GetComponent<ShootingEnemy>() || collision.gameObject.GetComponent<Enemy>())
-        {
-            Destroy(collision.gameObject);
-        }
-        else
-        {
             Destroy(gameObject);
-        }
     }
 }

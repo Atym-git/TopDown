@@ -10,7 +10,6 @@ public class ShootingEnemy : MonoBehaviour
 
     [SerializeField] private Transform _bulletRoot;
 
-    private float _delayafterSpawn = 2;
     private void Awake()
     {
         LoadResources();
@@ -36,6 +35,6 @@ public class ShootingEnemy : MonoBehaviour
 
     private void LoadResources()
     {
-        _bulletPrefab = Resources.Load("Prefabs/Bullet");
+        _bulletPrefab = Resources.Load("Prefabs/EnemyBullet");
     }
 }
