@@ -8,8 +8,10 @@ public class PlayerBullet : MonoBehaviour
     private Camera _mainCam;
     private Rigidbody2D _rb;
 
-    private const float _bulletSpeed = 5f;
+    private const float _bulletSpeed = 15f;
     private const float _bulletLifeTime = 5f;
+
+    //private EnemyHealth enemyHealth;
 
     private void Start()
     {
@@ -31,9 +33,13 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<ShootingEnemy>() || collision.gameObject.GetComponent<Enemy>())
+        //if (collision.gameObject.GetComponent<EnemyHealth>()/* || collision.gameObject.GetComponent<Enemy>()*/)
+        //{
+        //    Destroy(collision.gameObject);
+        //}
+        if (collision.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
         {
-            Destroy(collision.gameObject);
+            enemyHealth.TakeDamage(1);
         }
         Destroy(gameObject);
     }
