@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootingEnemy : MonoBehaviour
 {
-    private float _shootCd = 2;
+    private float _shootCd = 2.5f;
 
     private Object _bulletPrefab;
 
@@ -16,7 +16,7 @@ public class ShootingEnemy : MonoBehaviour
     }
     private void Start()
     {
-        _bulletRoot = transform.GetChild(0).transform;
+        //_bulletRoot = transform.GetChild(0).transform;
         StartCoroutine(Delay());
     }
 

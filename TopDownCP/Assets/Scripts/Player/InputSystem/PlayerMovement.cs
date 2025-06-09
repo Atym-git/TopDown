@@ -32,4 +32,9 @@ public class PlayerMovement : MonoBehaviour
         Vector2 _movement2d = _movement.ReadValue<Vector2>().normalized;
         _rb.velocity = new Vector2(_movement2d.x, _movement2d.y) * _moveSpeed;
     }
+
+    private void OnDestroy()
+    {
+        _movement.Disable();
+    }
 }

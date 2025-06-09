@@ -49,4 +49,15 @@ public class PlayerShoot : MonoBehaviour
     {
         _bulletPrefab = Resources.Load("Prefabs/PlayerBullet");
     }
+
+    private void Expose()
+    {
+        _mainInputActions.Game.Shoot.performed -= Shoot;
+    }
+
+    private void OnDestroy()
+    {
+        _mainInputActions.Game.Shoot.Disable();
+        Expose();
+    }
 }

@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
-    private const float _followSpeed = 0.05f;
+    [SerializeField] private float _followSpeed = 0.05f;
+
+    [SerializeField] private int damage = 3;
 
     private void OnTriggerStay2D(Collider2D player)
     {
@@ -18,9 +20,10 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerMovement>())
+        if (collision.gameObject.TryGetComponent(out PlayerHealth playerHealth))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Destroy(gameObject);
+            playerHealth.TakeDamage(damage);
         }
     }
 }
